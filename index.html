@@ -91,16 +91,16 @@
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
 
-        // Extract the 'verify' parameter (no need to add .png manually since it's part of the URL parameter)
+        // Extract the 'verify' parameter without the .png extension
         const fileName = urlParams.get('verify');
 
         // Log the file name to the console for debugging
         console.log("File name from URL:", fileName);
 
-        // If the 'verify' parameter exists, set the image source directly using the parameter
+        // If the 'verify' parameter exists, append '.png' to it and update the image source
         if (fileName) {
-            document.getElementById('CertificateImage').src = `https://verify.jgtl.org/${fileName}`;
-            console.log("Image source set to:", `https://verify.jgtl.org/${fileName}`);
+            document.getElementById('CertificateImage').src = `https://verify.jgtl.org/${fileName}.png`;
+            console.log("Image source set to:", `https://verify.jgtl.org/${fileName}.png`);
         } else {
             // If the 'verify' parameter is missing, log an error
             console.error("No 'verify' parameter found in the URL.");
