@@ -61,7 +61,7 @@
         .certificate-link {
             color: #2c3e50;
             text-decoration: none;
-            font-size: 1.5rem;
+            font-size: 1rem; /* Smaller font size */
             margin-top: 10px;
             display: block;
         }
@@ -72,16 +72,24 @@
 
         footer {
             position: fixed;
-            bottom: 12px;
+            bottom: 5px; /* Adjusted to prevent overlap */
             width: 100%;
             text-align: center;
             color: #bdc3c7;
-            font-size: 14px;
+            font-size: 12px; /* Smaller font size for footer */
         }
 
         @media (max-width: 768px) {
             .is-center {
                 font-size: 23px;
+            }
+
+            .certificate-link {
+                font-size: 0.9rem; /* Smaller font size for mobile */
+            }
+
+            footer {
+                font-size: 10px; /* Smaller footer font for mobile */
             }
         }
     </style>
@@ -97,7 +105,7 @@
 
     <div class="image-container">
         <img src="" id="CertificateImage" alt="Certificate">
-        <a href="https://www.jgtl.org" class="certificate-link">Go to Website</a>
+        <a href="https://www.jgtl.org" class="certificate-link">Back to Website</a>
     </div>
 
     <footer>
