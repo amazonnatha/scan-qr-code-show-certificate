@@ -24,37 +24,15 @@
 
         /* Logo container */
         .logo-container {
-            text-align: center;
-            margin-bottom: 5px; /* Reduced margin to bring the logo closer to the title */
+            text-align: left; /* Aligns logo to the left */
+            margin-bottom: 5px; /* Space below the logo */
+            width: 100%; /* Full width to keep left alignment */
         }
 
         .logo-container img {
-            width: 150px; /* Increased size (2x) */
+            width: 300px; /* Logo width (change as needed) */
             height: auto;
-        }
-
-        /* Updated Title Design */
-        .title-container {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .main-title {
-            font-size: 3rem;
-            color: #2c3e50; /* Professional dark blue */
-            font-weight: bold;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            display: block;
-        }
-
-        .subtitle {
-            font-size: 1.5rem;
-            color: #3498db; /* Light blue to match background */
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            display: block;
-            margin-top: 10px;
+            margin-left: 20px; /* Space from the left edge (optional) */
         }
 
         /* Styling for the Image and Footer */
@@ -96,14 +74,6 @@
         }
 
         @media (max-width: 768px) {
-            .main-title {
-                font-size: 2rem;
-            }
-
-            .subtitle {
-                font-size: 1.2rem;
-            }
-
             .is-center {
                 font-size: 23px;
             }
@@ -115,14 +85,8 @@
 
     <!-- Logo Section -->
     <div class="logo-container">
-        <img src="https://verify.jgtl.org/jgtl2.png" alt="JGTL Logo">
+        <img src="https://verify.jgtl.org/Jade%20and%20Gems%20Testing%20Laboratory.png" alt="Jade and Gems Testing Laboratory Logo">
     </div>
-
-    <!-- Updated Title -->
-    <h1 class="title-container">
-        <span class="main-title">JGTL</span>
-        <span class="subtitle">Jade and Gems Testing Laboratory</span>
-    </h1>
 
     <div class="image-container">
         <img src="" id="CertificateImage" alt="Certificate">
