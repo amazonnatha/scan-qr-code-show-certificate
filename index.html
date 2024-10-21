@@ -24,26 +24,27 @@
 
         /* Logo container */
         .logo-container {
-            text-align: center; /* Center-align text */
-            margin-bottom: 5px; /* Space below the logo */
+            text-align: center;
+            margin-bottom: 10px; /* Space below the logo */
             width: 100%; /* Full width to keep center alignment */
         }
 
         .logo-container img {
-            width: 300px; /* Logo width (change as needed) */
+            width: 80%; /* Make logo responsive */
+            max-width: 300px; /* Maximum width of the logo */
             height: auto;
             margin-bottom: 5px; /* Space below the logo */
         }
 
         .combined-title {
             color: #2c3e50; /* Color for title text */
-            font-size: 1.8rem; /* Slightly larger font size */
+            font-size: 1.5rem; /* Adjusted for better mobile display */
             margin: 5px 0; /* Space above and below the title */
         }
 
         /* Styling for the Image and Footer */
         .image-container {
-            width: 80%;
+            width: 90%; /* Increased width for mobile */
             max-width: 900px;
             padding: 20px;
             background-color: #ecf0f1;
@@ -61,27 +62,38 @@
         .certificate-link {
             color: #2c3e50;
             text-decoration: none;
-            font-size: 1rem; /* Smaller font size */
+            font-size: 0.9rem; /* Smaller font size */
             margin-top: 10px;
-            display: block;
+            display: inline-block; /* Allows padding */
+            padding: 10px 15px; /* Larger clickable area */
+            background-color: #bdc3c7; /* Button background color */
+            border-radius: 5px; /* Rounded corners for button */
+            transition: background-color 0.3s; /* Transition effect */
         }
 
         .certificate-link:hover {
-            color: #bdc3c7;
+            background-color: #2c3e50; /* Darker on hover */
+            color: white; /* Change text color on hover */
         }
 
         footer {
-            position: fixed;
+            position: relative; /* Changed to relative for better layout */
             bottom: 5px; /* Adjusted to prevent overlap */
             width: 100%;
             text-align: center;
             color: #bdc3c7;
             font-size: 12px; /* Smaller font size for footer */
+            margin-top: auto; /* Ensure footer stays at the bottom */
+            padding: 5px 0; /* Padding for footer */
         }
 
         @media (max-width: 768px) {
             .is-center {
-                font-size: 23px;
+                font-size: 20px; /* Adjust font size for mobile */
+            }
+
+            .combined-title {
+                font-size: 1.2rem; /* Slightly smaller title on mobile */
             }
 
             .certificate-link {
