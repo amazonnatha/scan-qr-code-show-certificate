@@ -120,9 +120,19 @@
         <a href="https://www.jgtl.org" class="certificate-link">Back to Website</a>
     </div>
 
+    <!-- Turnstile Checkbox Section -->
+    <div class="is-center">
+        <form action="/submit" method="POST">
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAAAyE1s3xjsL8KgDP"></div>
+            <button type="submit" class="certificate-link">Verify</button>
+        </form>
+    </div>
+
     <footer>
         &copy; 2024 jgtl.org. All rights reserved.
     </footer>
+
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
     <script>
         // Get the query parameters from the URL
