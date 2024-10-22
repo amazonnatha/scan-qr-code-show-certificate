@@ -25,26 +25,26 @@
         /* Logo container */
         .logo-container {
             text-align: center;
-            margin-bottom: 10px; /* Space below the logo */
-            width: 100%; /* Full width to keep center alignment */
+            margin-bottom: 10px;
+            width: 100%;
         }
 
         .logo-container img {
-            width: 80%; /* Make logo responsive */
-            max-width: 300px; /* Maximum width of the logo */
+            width: 80%;
+            max-width: 300px;
             height: auto;
-            margin-bottom: 5px; /* Space below the logo */
+            margin-bottom: 5px;
         }
 
         .combined-title {
-            color: #2c3e50; /* Color for title text */
-            font-size: 1.5rem; /* Adjusted for better mobile display */
-            margin: 5px 0; /* Space above and below the title */
+            color: #2c3e50;
+            font-size: 1.5rem;
+            margin: 5px 0;
         }
 
         /* Styling for the Image and Footer */
         .image-container {
-            width: 90%; /* Increased width for mobile */
+            width: 90%;
             max-width: 900px;
             padding: 20px;
             background-color: #ecf0f1;
@@ -62,46 +62,46 @@
         .certificate-link {
             color: #2c3e50;
             text-decoration: none;
-            font-size: 0.9rem; /* Smaller font size */
+            font-size: 0.9rem;
             margin-top: 10px;
-            display: inline-block; /* Allows padding */
-            padding: 10px 15px; /* Larger clickable area */
-            background-color: #bdc3c7; /* Button background color */
-            border-radius: 5px; /* Rounded corners for button */
-            transition: background-color 0.3s; /* Transition effect */
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #bdc3c7;
+            border-radius: 5px;
+            transition: background-color 0.3s;
         }
 
         .certificate-link:hover {
-            background-color: #2c3e50; /* Darker on hover */
-            color: white; /* Change text color on hover */
+            background-color: #2c3e50;
+            color: white;
         }
 
         footer {
-            position: relative; /* Changed to relative for better layout */
-            bottom: 5px; /* Adjusted to prevent overlap */
+            position: relative;
+            bottom: 5px;
             width: 100%;
             text-align: center;
-            color: black; /* Changed color to black */
-            font-size: 12px; /* Smaller font size for footer */
-            margin-top: auto; /* Ensure footer stays at the bottom */
-            padding: 5px 0; /* Padding for footer */
+            color: black;
+            font-size: 12px;
+            margin-top: auto;
+            padding: 5px 0;
         }
 
         @media (max-width: 768px) {
             .is-center {
-                font-size: 20px; /* Adjust font size for mobile */
+                font-size: 20px;
             }
 
             .combined-title {
-                font-size: 1.2rem; /* Slightly smaller title on mobile */
+                font-size: 1.2rem;
             }
 
             .certificate-link {
-                font-size: 0.9rem; /* Smaller font size for mobile */
+                font-size: 0.9rem;
             }
 
             footer {
-                font-size: 10px; /* Smaller footer font for mobile */
+                font-size: 10px;
             }
         }
     </style>
@@ -120,20 +120,18 @@
         <a href="https://www.jgtl.org" class="certificate-link">Back to Website</a>
     </div>
 
-    <!-- Turnstile Checkbox Section -->
-    <div class="is-center">
-        <form action="/submit" method="POST">
-            <div class="cf-turnstile" data-sitekey="0x4AAAAAAAyE1s3xjsL8KgDP"></div>
-            <button type="submit" class="certificate-link">Verify</button>
-        </form>
-    </div>
+    <!-- Turnstile Verification Section -->
+    <form action="/submit" method="POST">
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAAAyE1s3xjsL8KgDP"></div>
+        <button type="submit">Submit</button>
+    </form>
 
     <footer>
         &copy; 2024 jgtl.org. All rights reserved.
     </footer>
 
+    <!-- JavaScript for Turnstile and Certificate Display -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-
     <script>
         // Get the query parameters from the URL
         const queryString = window.location.search;
