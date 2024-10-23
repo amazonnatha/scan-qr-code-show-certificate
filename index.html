@@ -30,4 +30,130 @@
         }
 
         .logo-container img {
-           
+            width: 80%; /* Make logo responsive */
+            max-width: 300px; /* Maximum width of the logo */
+            height: auto;
+            margin-bottom: 5px; /* Space below the logo */
+        }
+
+        .combined-title {
+            color: #2c3e50; /* Color for title text */
+            font-size: 1.5rem; /* Adjusted for better mobile display */
+            margin: 5px 0; /* Space above and below the title */
+        }
+
+        /* Styling for the Image and Footer */
+        .image-container {
+            width: 90%; /* Increased width for mobile */
+            max-width: 900px;
+            padding: 20px;
+            background-color: #ecf0f1;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 10px; /* Space above the image */
+        }
+
+        .input-container {
+            margin-top: 10px; /* Space above the input section */
+            display: flex; /* Use flexbox for alignment */
+            justify-content: center; /* Center items horizontally */
+            align-items: center; /* Center items vertically */
+        }
+
+        .input-container input {
+            width: 40%; /* Width for both inputs */
+            max-width: 300px; /* Maximum width of the input */
+            padding: 10px; /* Padding for the input */
+            margin: 0 10px; /* Space between inputs */
+            border: 1px solid #2c3e50; /* Border for the input */
+            border-radius: 5px; /* Rounded corners for the input */
+        }
+
+        .input-container button {
+            padding: 10px 15px; /* Padding for the button */
+            background-color: #2c3e50; /* Button background color */
+            color: white; /* Text color for the button */
+            border: none; /* Remove border */
+            border-radius: 5px; /* Rounded corners for the button */
+            cursor: pointer; /* Change cursor on hover */
+            transition: background-color 0.3s; /* Transition effect */
+        }
+
+        .input-container button:hover {
+            background-color: #bdc3c7; /* Change button color on hover */
+        }
+
+        footer {
+            position: relative; /* Changed to relative for better layout */
+            bottom: 5px; /* Adjusted to prevent overlap */
+            width: 100%;
+            text-align: center;
+            color: black; /* Changed color to black */
+            font-size: 12px; /* Smaller font size for footer */
+            margin-top: auto; /* Ensure footer stays at the bottom */
+            padding: 5px 0; /* Padding for footer */
+        }
+
+        @media (max-width: 768px) {
+            .is-center {
+                font-size: 20px; /* Adjust font size for mobile */
+            }
+
+            .combined-title {
+                font-size: 1.2rem; /* Slightly smaller title on mobile */
+            }
+
+            footer {
+                font-size: 10px; /* Smaller footer font for mobile */
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Logo Section -->
+    <div class="logo-container">
+        <img src="https://verify.jgtl.org/Jade%20and%20Gems%20Testing%20Laboratory(2).png" alt="Jade and Gems Testing Laboratory Logo">
+        <div class="combined-title">Jade and Gems Testing Laboratory - Online Report Verification</div>
+    </div>
+
+    <div class="image-container">
+        <div class="input-container">
+            <input type="text" id="imageName" placeholder="Enter Certificate No.">
+            <input type="email" id="email" placeholder="Enter Your Email">
+            <button id="showImageButton">Show Image</button>
+        </div>
+        <img src="" id="CertificateImage" alt="Certificate" style="display:none;"> <!-- Hide image initially -->
+    </div>
+
+    <footer>
+        &copy; 2024 jgtl.org. All rights reserved.
+    </footer>
+
+    <script>
+        document.getElementById('showImageButton').onclick = function() {
+            const imageName = document.getElementById('imageName').value.trim(); // Get the input value
+            const email = document.getElementById('email').value.trim(); // Get the email value
+            if (imageName) {
+                const imageUrl = `https://verify.jgtl.org/${imageName}.png`; // Construct the image URL
+                const certificateImage = document.getElementById('CertificateImage');
+                certificateImage.src = imageUrl; // Set the image source
+                certificateImage.style.display = 'block'; // Show the image
+                console.log("Image source set to:", imageUrl); // Log the URL for debugging
+                console.log("Email entered:", email); // Log the email for debugging
+            } else {
+                alert("Please enter a valid certificate number."); // Alert if the input is empty
+            }
+        };
+    </script>
+</body>
+
+</html>
