@@ -139,12 +139,42 @@
         // Log the file name to the console for debugging
         console.log("File name from URL:", fileName);
 
-        // If the 'verify' parameter exists, append '.png' to it and update the image source
+        // Folders to search for the image
+        const folders = ['qr_codes', 'other_folder']; // Add as many folder names as needed
+        let found = false; // To track if the image is found
+        const certificateImage = document.getElementById('CertificateImage');
+
+        function checkImageInFolder(index) {
+            if (index >= folders.length) {
+                if (!found) {
+                    console.error('Certificate not found in any folder.');
+                    certificateImage.style.display = 'none';
+                }
+                return;
+            }
+
+            const folder = folders[index];
+            const imageUrl = `https://verify.jgtl.org/${folder}/${fileName}.png`;
+            const img = new Image();
+            img.src = imageUrl;
+
+            img.onload = function() {
+                certificateImage.src = imageUrl; // Set the image source
+                certificateImage.style.display = 'block'; // Show the image
+                console.log("Image source set to:", imageUrl); // Log the URL for debugging
+                found = true; // Image was found
+            };
+
+            img.onerror = function() {
+                // Image not found in this folder, try the next one
+                checkImageInFolder(index + 1);
+            };
+        }
+
+        // If the 'verify' parameter exists, try to find the image
         if (fileName) {
-            document.getElementById('CertificateImage').src = `https://verify.jgtl.org/${fileName}.png`;
-            console.log("Image source set to:", `https://verify.jgtl.org/${fileName}.png`);
+            checkImageInFolder(0); // Start checking from the first folder
         } else {
-            // If the 'verify' parameter is missing, log an error
             console.error("No 'verify' parameter found in the URL.");
         }
     </script>
