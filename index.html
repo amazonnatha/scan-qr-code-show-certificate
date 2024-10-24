@@ -148,9 +148,10 @@
             if (index >= folders.length) {
                 if (!found) {
                     console.error('Certificate not found in any folder.');
-                    certificateImage.style.display = 'none';
+                    certificateImage.style.display = 'none'; // Hide the image
+                    alert("Certificate not found. Please check the ID.");
+                    return;
                 }
-                return;
             }
 
             const folder = folders[index];
@@ -173,9 +174,21 @@
 
         // If the 'verify' parameter exists, try to find the image
         if (fileName) {
-            checkImageInFolder(0); // Start checking from the first folder
+            try {
+                checkImageInFolder(0); // Start checking from the first folder
+            } catch (error) {
+                console.error("An error occurred while searching for the image:", error);
+                alert("There was an issue loading the certificate. Please try again later.");
+                // Display a fallback image
+                certificateImage.src = "https://verify.jgtl.org/placeholder.png";
+                certificateImage.style.display = 'block';
+            }
         } else {
             console.error("No 'verify' parameter found in the URL.");
+            alert("No verification ID provided. Please check the URL.");
+            // Optionally, display a placeholder or error message image
+            certificateImage.src = "https://verify.jgtl.org/invalid_parameter.png";
+            certificateImage.style.display = 'block';
         }
     </script>
 </body>
