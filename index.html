@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JGTL Online Report Verification</title>
+    <style>
+        .is-center {
+            text-align: center;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #d9ddef;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Logo container */
+        .logo-container {
+            text-align: center;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        .logo-container img {
+            width: 80%;
+            max-width: 300px;
+            height: auto;
+            margin-bottom: 5px;
+        }
+
+        .combined-title {
+            color: #2c3e50;
+            font-size: 1.5rem;
+            margin: 5px 0;
+        }
+
+        /* Styling for the Image and Footer */
+        .image-container {
+            width: 90%;
+            max-width: 900px;
+            padding: 20px;
+            background-color: #ecf0f1;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .certificate-link {
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #bdc3c7;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .certificate-link:hover {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        footer {
+            position: relative;
+            bottom: 5px;
+            width: 100%;
+            text-align: center;
+            color: black;
+            font-size: 12px;
+            margin-top: auto;
+            padding: 5px 0;
+        }
+
+        @media (max-width: 768px) {
+            .is-center {
+                font-size: 20px;
+            }
+
+            .combined-title {
+                font-size: 1.2rem;
+            }
+
+            .certificate-link {
+                font-size: 0.9rem;
+            }
+
+            footer {
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Logo Section -->
+    <div class="logo-container">
+        <img src="https://verify.jgtl.org/Jade%20and%20Gems%20Testing%20Laboratory(2).png" alt="Jade and Gems Testing Laboratory Logo">
+        <div class="combined-title">Jade and Gems Testing Laboratory - Online Report Verification</div>
+    </div>
+
+    <!-- Form Section -->
+    <form action="/submit" method="POST">
+        <!-- Image Section -->
+        <div class="image-container">
+            <!-- Dynamic Certificate Image -->
+            <img src="" id="CertificateImage" alt="Certificate" style="display: none;">
+            
+            <!-- Static Image (Certificate Back) -->
+            <img src="https://verify.jgtl.org/Certificate%20Back.png" alt="Certificate Back">
+            
+            <a href="https://www.jgtl.org" class="certificate-link">Back to Website</a>
+        </div>
+    </form>
+
+    <footer>
+        &copy; 2024 jgtl.org. All rights reserved.
+    </footer>
+
+    <script>
+        // Get the query parameters from the URL
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+
+        // Extract the 'verify' parameter without the .png extension
+        const fileName = urlParams.get('verify');
+
+        // Folders to search for the image
+        const folders = ['qr_codes', 'other_folder']; // Add as many folder names as needed
+        let found = false; // To track if the image is found
+        const certificateImage = document.getElementById('CertificateImage');
+
+        function checkImageInFolder(index) {
+            if (index >= folders.length) {
+                if (!found) {
+                    console.error('Certificate not found in any folder.');
+                    certificateImage.style.display = 'none'; // Hide the image if not found
+                    alert("Certificate not found. Please check the ID."); // Alert the user
+                }
+                return;
+            }
+
+            const folder = folders[index];
+            const imageUrl = https://verify.jgtl.org/${folder}/${fileName}.png;
+            const img = new Image();
+            img.src = imageUrl;
+
+            img.onload = function() {
+                certificateImage.src = imageUrl; // Set the image source
+                certificateImage.style.display = 'block'; // Show the image
+                found = true; // Image was found
+            };
+
+            img.onerror = function() {
+                // Image not found in this folder, try the next one
+                checkImageInFolder(index + 1);
+            };
+        }
+
+        // If the 'verify' parameter exists, try to find the image
+        if (fileName) {
+            checkImageInFolder(0); // Start checking from the first folder
+        } else {
+            alert("No verification ID provided."); // Alert the user
+        }
+    </script>
+</body>
+
+</html>
