@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JGTL Online Report Verification</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f9fc;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Header */
+        .header {
+            width: 100%;
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+            padding: 20px 0;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .header img {
+            max-width: 100px;
+            vertical-align: middle;
+            margin-bottom: 10px;
+        }
+
+        .header-title {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        /* Form Section */
+        .form-container {
+            margin-top: 20px;
+            width: 90%;
+            max-width: 500px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .form-container h2 {
+            color: #2c3e50;
+        }
+
+        .form-container label {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: #333;
+            text-align: left;
+        }
+
+        .form-container input[type="text"],
+        .form-container input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            text-transform: uppercase;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .form-container button:hover {
+            background-color: #1a73e8;
+        }
+
+        /* Image Section */
+        .image-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .certificate-link {
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: inline-block;
+            padding: 10px 15px;
+            margin-top: 10px;
+            background-color: #bdc3c7;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .certificate-link:hover {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header class="header">
+        <img src="https://verify.jgtl.org/Jade%20and%20Gems%20Testing%20Laboratory(2).png" alt="Jade and Gems Testing Laboratory Logo">
+        <div class="header-title">Jade and Gems Testing Laboratory Online Verification</div>
+    </header>
+
+    <!-- Form Section -->
+    <div class="form-container">
+        <h2>Online Report Verification</h2>
+        <form id="verificationForm">
+            <label for="reportNumber">Report Number:</label>
+            <input type="text" id="reportNumber" name="reportNumber" required>
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required>
+
+            <button type="button" onclick="displayImage()">Verify</button>
+        </form>
+    </div>
+
+    <!-- Image Section -->
+    <div class="image-container">
+        <img src="" id="CertificateImage" alt="Certificate">
+        <a href="https://www.jgtl.org" class="certificate-link">Back to Website</a>
+    </div>
+
+    <footer>
+        &copy; 2024 Jade and Gems Testing Laboratory. All rights reserved.
+    </footer>
+
+    <script>
+        const folders = ['qr_codes', 'other_folder']; // Add as many folder names as needed
+        let found = false;
+        const certificateImage = document.getElementById('CertificateImage');
+
+        function displayImage() {
+            const reportNumber = document.getElementById('reportNumber').value.trim().toUpperCase();
+            const email = document.getElementById('email').value.trim();
+
+            if (!reportNumber || !email) {
+                alert("Please enter both the report number and your email address.");
+                return;
+            }
+
+            checkImageInFolder(0, reportNumber);
+        }
+
+        function checkImageInFolder(index, reportNumber) {
+            if (index >= folders.length) {
+                if (!found) {
+                    certificateImage.style.display = 'none';
+                    alert("Certificate not found. Please check the report number.");
+                }
+                return;
+            }
+
+            const folder = folders[index];
+            const imageUrl = `https://verify.jgtl.org/${folder}/${reportNumber}.png`;
+            const img = new Image();
+            img.src = imageUrl;
+
+            img.onload = function() {
+                certificateImage.src = imageUrl;
+                certificateImage.style.display = 'block';
+                found = true;
+            };
+
+            img.onerror = function() {
+                checkImageInFolder(index + 1, reportNumber);
+            };
+        }
+    </script>
+
+</body>
+
+</html>
