@@ -120,41 +120,34 @@
         // Extract the 'verify' parameter without the .png extension
         const fileName = urlParams.get('verify');
 
-        // Folders to search for the image
-        const folders = ['qr_codes', 'other_folder']; // Add as many folder names as needed
-        let found = false; // To track if the image is found
+        // Define the new base URL for Google Cloud-hosted images
+        const baseURL = "https://reportcheck.jgtl.org/";
+
+        // Get the image container
         const certificateImage = document.getElementById('CertificateImage');
 
-        function checkImageInFolder(index) {
-            if (index >= folders.length) {
-                if (!found) {
-                    console.error('Certificate not found in any folder.');
-                    certificateImage.style.display = 'none'; // Hide the image if not found
-                    alert("Certificate not found. Please check the ID."); // Alert the user
-                }
-                return;
-            }
+        // Function to check the existence of the image on the server
+        function checkImage(imageUrl) {
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.src = imageUrl;
 
-            const folder = folders[index];
-            const imageUrl = `https://verify.jgtl.org/${folder}/${fileName}.png`;
-            const img = new Image();
-            img.src = imageUrl;
-
-            img.onload = function() {
-                certificateImage.src = imageUrl; // Set the image source
-                certificateImage.style.display = 'block'; // Show the image
-                found = true; // Image was found
-            };
-
-            img.onerror = function() {
-                // Image not found in this folder, try the next one
-                checkImageInFolder(index + 1);
-            };
+                img.onload = () => resolve(true); // Image exists
+                img.onerror = () => resolve(false); // Image does not exist
+            });
         }
 
-        // If the 'verify' parameter exists, try to find the image
+        // If the 'verify' parameter exists, construct the full URL and check if the image exists
         if (fileName) {
-            checkImageInFolder(0); // Start checking from the first folder
+            const imageUrl = `${baseURL}${fileName}.png`;
+            checkImage(imageUrl).then((exists) => {
+                if (exists) {
+                    certificateImage.src = imageUrl; // Set the image source
+                    certificateImage.style.display = 'block'; // Show the image
+                } else {
+                    alert("Certificate not found. Please check the ID."); // Alert the user
+                }
+            });
         } else {
             alert("No verification ID provided."); // Alert the user
         }
