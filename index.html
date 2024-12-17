@@ -170,12 +170,12 @@
         <!-- Spinner -->
         <div id="spinner" class="spinner"></div>
         
+        <!-- Static Image (Certificate Back) -->
+        <img src="https://verify.jgtl.org/Certificate%20Back%20white.png" alt="Certificate Back" id="staticImage">
+
         <!-- Dynamic Certificate Image -->
         <img id="CertificateImage" alt="Certificate" style="display: none;">
 
-        <!-- Static Image (Certificate Back) -->
-        <img src="https://verify.jgtl.org/Certificate%20Back%20white.png" alt="Certificate Back">
-        
         <a href="https://www.jgtl.org" class="certificate-link">Back to Website</a>
     </div>
 
@@ -197,6 +197,7 @@
         // Get the image container and spinner
         const certificateImage = document.getElementById('CertificateImage');
         const spinner = document.getElementById('spinner');
+        const staticImage = document.getElementById('staticImage'); // Reference to static image
 
         // Function to check the existence of the image on the server
         function checkImage(imageUrl) {
