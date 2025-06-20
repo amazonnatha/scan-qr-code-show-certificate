@@ -6,123 +6,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JGTL Online Report Verification</title>
     <style>
+        /* Define the golden color variables */
+        :root {
+            --golden-rim: #d2b48c; /* A nice golden-brown for the rim */
+            --golden-text: #a0845c; /* The specific golden-brown for text/titles */
+            --button-bg: #b8860b; /* A darker gold for the button */
+            --button-hover-bg: #a07a00; /* Even darker gold on hover */
+            --light-bg: #f9f5ee; /* The lighter background from the image */
+        }
+
         /* General Styling */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f5ee;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg); /* Use the lighter background */
             margin: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-height: 100vh;
+            color: #333;
         }
 
         /* Header */
         .header {
             width: 100%;
-            background-color: #fff;
-            border-bottom: 1px solid #ddd;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
             padding: 20px 0;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
             text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         .header img {
-            max-width: 250px;
+            max-width: 200px;
             vertical-align: middle;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
         .header-title {
-            font-size: 1.5rem;
-            color: #a0845c;
-            font-weight: bold;
-        }
-
-        /* Form Section */
-        .form-container {
-            margin-top: 20px;
-            width: 90%;
-            max-width: 500px;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        .form-container h2 {
-            color: #a0845c;
-        }
-
-        .form-container label {
-            display: block;
-            font-size: 1rem;
-            margin-bottom: 5px;
-            color: #333;
-            text-align: left;
-        }
-
-        .form-container input[type="text"],
-        .form-container input[type="email"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 1rem;
-            box-sizing: border-box;
-            text-transform: uppercase;
-        }
-
-        .form-container button {
-            width: 100%;
-            padding: 10px;
-            background-color: #a0845c;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .form-container button:hover {
-            background-color: #8a6a4a;
+            font-size: 1.4rem;
+            color: var(--golden-text); /* Use the golden text color */
+            font-weight: 600;
         }
 
         /* Image Section */
         .image-container {
-            margin-top: 20px;
-            text-align: center;
-            padding: 20px;
+            margin-top: 30px;
+            width: 90%;
+            max-width: 700px;
+            padding: 25px;
             background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3); /* 3D Effect */
-            width: 80%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            border-radius: 12px;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+            /* Added golden rim */
+            border: 2px solid var(--golden-rim); /* Golden border for the container */
         }
 
         .image-container img {
-            max-width: 100%; /* Full-size image */
+            max-width: 100%;
             height: auto;
-            border-radius: 10px;
-            display: none;
-            margin-bottom: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* 3D Effect for image */
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         /* Loading Spinner */
         .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #a0845c;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--golden-text); /* Use golden color for spinner */
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 2s linear infinite;
-            margin: 0 auto;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
             display: block;
         }
 
@@ -132,48 +98,49 @@
         }
 
         .certificate-link {
-            color: #000000;
+            color: #ffffff;
             text-decoration: none;
-            font-size: 0.9rem;
-            display: inline-block;
-            padding: 10px 15px;
-            margin-top: 10px;
-            background-color: #bdc3c7;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+            font-size: 1rem;
+            padding: 12px 25px;
+            margin-top: 20px;
+            background-color: var(--button-bg); /* Use golden button background */
+            border-radius: 6px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+            border: none; /* Ensure no default button border interferes */
         }
 
         .certificate-link:hover {
-            background-color: #8a6a4a;
-            color: white;
+            background-color: var(--button-hover-bg); /* Darker gold on hover */
+            transform: translateY(-2px);
         }
 
         /* Footer */
         footer {
-            margin-top: 40px;
-            font-size: 0.9rem;
-            color: #666;
+            margin-top: auto;
+            padding: 20px;
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            text-align: center;
+            width: 100%;
+            background-color: #ffffff;
+            border-top: 1px solid #e0e0e0;
         }
     </style>
 </head>
 
 <body>
 
-    <!-- Header Section -->
     <div class="header">
         <img src="https://verify.jgtl.org/Jade%20and%20Gems%20Testing%20Laboratory(3).png" alt="Jade and Gems Testing Laboratory Logo">
         <div class="header-title">Jade and Gems Testing Laboratory - Online Report Verification</div>
     </div>
 
-    <!-- Image Section -->
     <div class="image-container">
-        <!-- Spinner -->
         <div id="spinner" class="spinner"></div>
         
-        <!-- Static Image (Certificate Back) -->
         <img src="https://verify.jgtl.org/Certificate%20Back%20white.png" alt="Certificate Back" id="staticImage">
 
-        <!-- Dynamic Certificate Image -->
         <img id="CertificateImage" alt="Certificate" style="display: none;">
 
         <a href="https://www.jgtl.org" class="certificate-link">Back to Website</a>
@@ -216,6 +183,8 @@
 
             // Show the spinner before loading
             spinner.style.display = 'block';
+            staticImage.style.display = 'none'; // Hide static image when trying to load dynamic one
+
 
             checkImage(imageUrl).then((exists) => {
                 if (exists) {
@@ -225,11 +194,13 @@
                 } else {
                     alert("Certificate not found. Please check the ID."); // Alert the user
                     spinner.style.display = 'none'; // Hide the spinner if image not found
+                    staticImage.style.display = 'block'; // Show static image if dynamic not found
                 }
             });
         } else {
             alert("No verification ID provided."); // Alert the user
             spinner.style.display = 'none'; // Hide the spinner if no ID
+            staticImage.style.display = 'block'; // Show static image if no ID provided
         }
     </script>
 
